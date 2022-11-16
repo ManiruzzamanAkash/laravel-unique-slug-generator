@@ -1,0 +1,31 @@
+{
+    "name": "akash/laravel-unique-slug",
+    "description": "A simple but beautiful unique slug generator for Laravel eloquent model.",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Akash\\LaravelUniqueSlug\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ManiruzzamanAkash",
+            "email": "manirujjamanakash@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.4"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Akash\\LaravelUniqueSlug\\UniqueSlugServiceProvider"
+            ],
+            "aliases": {
+                "UniqueSlug": "Akash\\LaravelUniqueSlug\\UniqueSlug"
+            }
+        }
+    }
+}
