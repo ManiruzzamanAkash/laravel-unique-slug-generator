@@ -1,0 +1,1 @@
+# laravel-unique-slug-generator
