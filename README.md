@@ -15,22 +15,80 @@ composer require maniruzzaman/laravel-unique-slug
 ```php
 use Akash\LaravelUniqueSlug\Facades\UniqueSlug;
 ```
+### Example #01- Post unique slug from title
 
+Let's assume, we have in `Post` class, we've added `slug` column which is unique. Now, if we passed `title` and generate `slug` from that, then -
 
 ```php
-UniqueSlug::generate(App\Models\User::class, 'akash', 'name');
-// akash
+use App\Models\Post;
 
-// After creating a new user with name akash, then again hit
-UniqueSlug::generate(App\Models\User::class, 'akash', 'name');
-// akash-1
+// First time create post with title Simple Post
+UniqueSlug::generate(Post::class, 'Simple Post', 'slug');
+// Output: simple-post
 
+// Second time create post with title Simple Post
+UniqueSlug::generate(Post::class, 'Simple Post', 'slug');
+// Output: simple-post-1
 
-// After creating a new user with name akash-1, then again hit
-UniqueSlug::generate(App\Models\User::class, 'akash', 'name');
-// akash-2
+// Third time create post with title Simple Post >> simple-post
+UniqueSlug::generate(Post::class, 'Simple Post', 'slug');
+// Output: simple-post-2
 ```
 
+### Example #02 - Pass custom separator
+
+Let's assume separator is `''` empty.
+
+```php
+// First time create user.
+UniqueSlug::generate(User::class, 'akash', 'username', ''); // akash
+
+// Second time create user.
+UniqueSlug::generate(User::class, 'akash', 'username', ''); // akash1
+
+// Third time create user.
+UniqueSlug::generate(User::class, 'akash', 'username', ''); // akash2
+```
+
+### Example - Unique slug for category or any model easily
+```php
+public function create(array $data): Category|null
+{
+    if (empty($data['slug'])) {
+        $data['slug'] = UniqueSlug::generate(Category::class, $data['name'], 'slug');
+    }
+
+    return Category::create($data);
+}
+```
+
+## API Docs
+
+### Generate method -
+```php
+UniqueSlug::generate($model, $value, $field, $separator);
+```
+
+```php
+/**
+ * Generate a Unique Slug.
+ *
+ * @param object $model
+ * @param string $value
+ * @param string $field
+ * @param string $separator
+ *
+ * @return string
+ * @throws \Exception
+ */
+public function generate(
+    $model,
+    $value,
+    $field,
+    $separator = null
+): string
+
+```
 
 #### Publish configuration
 ```sh
