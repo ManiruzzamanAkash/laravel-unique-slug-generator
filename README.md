@@ -9,6 +9,28 @@ A simple but beautiful unique slug generator for Laravel eloquent model.
 composer require maniruzzaman/laravel-unique-slug
 ```
 
+## Configuration
+**Service Provider Registration**
+In `config/app.php`, add in `providers` array -
+
+```php
+'providers' => [
+    // ...
+    Akash\LaravelUniqueSlug\UniqueSlugServiceProvider::class,
+    // ...
+],
+```
+
+**Facade Class Alias**
+Add in aliases array - 
+```php
+'aliases' => Facade::defaultAliases()->merge([
+    // ...
+    'UniqueSlug' => Akash\LaravelUniqueSlug\Facades\UniqueSlug::class,
+    // ...
+])->toArray(),
+```
+
 ## Use from Controller
 
 #### Import first the UniqueSlug facade
